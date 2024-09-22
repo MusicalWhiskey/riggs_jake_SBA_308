@@ -78,7 +78,15 @@ const LearnerSubmissions = [
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
+  try {
+    if (ag.course_id !== course_id) {
+      throw new Error(`Invalid. Assignment not part of course.`)
+    }
+    console.log('Assignment not part of course')
+  }
+  catch {}
   const result = [
+
     {
       id: 125,
       avg: 0.985, // (47 + 150) / (50 + 150)
@@ -90,6 +98,12 @@ function getLearnerData(course, ag, submissions) {
       avg: 0.82, // (39 + 125) / (50 + 150)
       1: 0.78, // 39 / 50
       2: 0.833 // late: (140 - 15) / 150
+    },
+    {
+      id: 243,
+      avg: 0.24,
+      1: 0.24,
+      2: 0.43
     }
   ];
 
@@ -102,3 +116,4 @@ function getLearnerData(course, ag, submissions) {
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
+
