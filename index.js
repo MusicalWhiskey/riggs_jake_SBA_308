@@ -139,8 +139,8 @@ function getLearnerData(course, ag, submissions) {
       };
       // Add individual assignment scores
       for (const assignment of ag.assignments) {
-        if (learnerData.assignmentScores.hasOwnProperty(assignment.id =`Assignment ${ls.assignment_id}`)) {
-          learnerResult[assignment.id] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
+        if (learnerData.assignmentScores.hasOwnProperty(assignment.id)) {
+          learnerResult[`Assignment ${assignment.id}`] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
         }
       }
       result.push(learnerResult);
@@ -150,6 +150,6 @@ function getLearnerData(course, ag, submissions) {
   return result;
 }
 
-// Example usage:
+// Final:
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 console.log(result);
