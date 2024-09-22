@@ -139,7 +139,7 @@ function getLearnerData(course, ag, submissions) {
       // Add individual assignment scores
       for (const assignment of ag.assignments) {
         if (learnerData.assignmentScores.hasOwnProperty(assignment.id)) {
-          learnerResult[`Assignment ${assignment.id}`] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
+          learnerResult[`assignment_${assignment.id}`] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
         }
       }
       result.push(learnerResult);
