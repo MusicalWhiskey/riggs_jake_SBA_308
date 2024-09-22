@@ -76,7 +76,7 @@ const LearnerSubmissions = [
   }
 ];
 
-delete LearnerSubmissions [2];
+LearnerSubmissions.splice(2, 1);
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
@@ -84,7 +84,7 @@ function getLearnerData(course, ag, submissions) {
     if (ag.course_id !== course_id) {
       throw new Error(`Invalid. Assignment not part of course.`)
     }
-    console.log('Assignment not part of course')
+    console.log('Assignment not part of course');
   }
   catch {}
 
@@ -97,9 +97,8 @@ function getLearnerData(course, ag, submissions) {
   // Process submissions using forEach
   submissions.forEach((submission) => {
     const { learner_id, assignment_id, submission: { submitted_at, score } } = submission;
-
     //Testing to see that all submissions are appearing before removing due to assignment not being due.
-    console.log(submission)
+    // console.log(submission)
   
 
     // Is the work late?
@@ -144,6 +143,7 @@ function getLearnerData(course, ag, submissions) {
         }
       }
       result.push(learnerResult);
+      // console.log(learnerResult)
     }
   }
 
