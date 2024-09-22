@@ -76,6 +76,8 @@ const LearnerSubmissions = [
   }
 ];
 
+delete LearnerSubmissions [2];
+
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
   try {
@@ -106,6 +108,48 @@ function getLearnerData(course, ag, submissions) {
     const submittedOn = new Date(submitted_at); //Adjusted for strings
     const lateWork = submittedOn > dueOn;
 
+    
     // Take off 10% if late
     const adjustedScore = lateWork ? Math.max(score - 0.1 * assignment.points_possible, 0) : score;
 
+
+    // Update learner data
+    if (!learnerDataObject[learner_id]) {
+      learnerDataObject[learner_id] = {
+        id: learner_id,
+        totalScore: 0,
+        totalWeight: 0,
+        assignmentScores: {},
+      };
+    }
+    const learnerData = learnerDataObject[learner_id];
+    learnerData.totalScore += adjustedScore;
+    learnerData.totalWeight += assignment.points_possible;
+    learnerData.assignmentScores[assignment_id] = adjustedScore;
+  });
+
+  // Calculate weighted averages and construct the result array
+  for (const learner_id in learnerDataObject) {
+    if (Object.prototype.hasOwnProperty.call(learnerDataObject, learner_id)) {
+      const learnerData = learnerDataObject[learner_id];
+      const avg = learnerData.totalScore / learnerData.totalWeight;
+      const learnerResult = {
+        id: learner_id,
+        avg: avg
+      };
+      // Add individual assignment scores
+      for (const assignment of ag.assignments) {
+        if (learnerData.assignmentScores.hasOwnProperty(assignment.id)) {
+          learnerResult[assignment.id] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
+        }
+      }
+      result.push(learnerResult);
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+console.log(result);
