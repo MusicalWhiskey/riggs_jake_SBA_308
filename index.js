@@ -96,7 +96,16 @@ function getLearnerData(course, ag, submissions) {
   return result;
 }
 
+
+
+
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
+
+/**
+ * 
+ * 
+ * test
+ */
 
