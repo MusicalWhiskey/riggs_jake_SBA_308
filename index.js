@@ -85,35 +85,27 @@ function getLearnerData(course, ag, submissions) {
     console.log('Assignment not part of course')
   }
   catch {}
-  const result = [
 
-    {
-      id: 125,
-      avg: 0.985, // (47 + 150) / (50 + 150)
-      1: 0.94, // 47 / 50
-      2: 1.0 // 150 / 150
-    },
-    {
-      id: 132,
-      avg: 0.82, // (39 + 125) / (50 + 150)
-      1: 0.78, // 39 / 50
-      2: 0.833 // late: (140 - 15) / 150
-    },
-    {
-      id: 243,
-      avg: 0.24,
-      1: 0.24,
-      2: 0.43
-    }
-  ];
+  //Results array
+  const result = [];
 
-  return result;
-}
+  // Made an object to store learner information
+  const learnerDataObject = {};
 
+  // Process submissions using forEach
+  submissions.forEach((submission) => {
+    const { learner_id, assignment_id, submission: { submitted_at, score } } = submission;
 
+    //Testing to see that all submissions are appearing before removing due to assignment not being due.
+    console.log(submission)
+  
 
+    // Is the work late?
+    const assignment = ag.assignments.find((a) => a.id === assignment_id);
+    const dueOn = new Date(assignment.due_at); //Adjusted for strings
+    const submittedOn = new Date(submitted_at); //Adjusted for strings
+    const lateWork = submittedOn > dueOn;
 
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-
-console.log(result);
+    // Take off 10% if late
+    const adjustedScore = lateWork ? Math.max(score - 0.1 * assignment.points_possible, 0) : score;
 
