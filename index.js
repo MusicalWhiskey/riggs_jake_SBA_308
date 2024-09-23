@@ -101,6 +101,11 @@ LearnerSubmissions.splice(2, 1);
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
+  
+  /**
+   * Throws error if assignment isn't part of course
+   */
+  
   try {
     if (ag.course_id !== course_id) {
       throw new Error(`Invalid. Assignment not part of course.`)
@@ -148,6 +153,10 @@ function getLearnerData(course, ag, submissions) {
   });
 
   //Calculate averages
+  /**
+   * 
+   * This loop insures that the properties in the learnerDataObject exist and won't cause errors for the object
+   */
   for (const learner_id in learnerDataObject) {
     if (Object.prototype.hasOwnProperty.call(learnerDataObject, learner_id)) {
       const learnerData = learnerDataObject[learner_id];
