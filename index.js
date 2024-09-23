@@ -127,7 +127,7 @@ function getLearnerData(course, ag, submissions) {
     learnerData.assignmentScores[assignment_id] = adjustedScore;
   });
 
-  // Calculate weighted averages and construct the result array
+  // Calculate weighted averages
   for (const learner_id in learnerDataObject) {
     if (Object.prototype.hasOwnProperty.call(learnerDataObject, learner_id)) {
       const learnerData = learnerDataObject[learner_id];
@@ -136,7 +136,7 @@ function getLearnerData(course, ag, submissions) {
         id: learner_id,
         avg: avg
       };
-      // Add individual assignment scores
+      // Add learner assignment scores
       for (const assignment of ag.assignments) {
         if (learnerData.assignmentScores.hasOwnProperty(assignment.id)) {
           learnerResult[`assignment_${assignment.id}`] = learnerData.assignmentScores[assignment.id] / assignment.points_possible;
