@@ -73,7 +73,28 @@ const LearnerSubmissions = [
       submitted_at: "2023-03-07",
       score: 140
     }
-  }
+  },
+  /**
+   * 
+   * Testing new learner_id's
+   */
+  // {
+  //   learner_id: 140,
+  //   assignment_id: 1,
+  //   submission: {
+  //     submitted_at: "2023-03-07",
+  //     score: 95
+  //   }
+  // },
+  // {
+  //   learner_id: 140,
+  //   assignment_id: 2,
+  //   submission: {
+  //     submitted_at: "2023-03-07",
+  //     score: 140
+  //   }
+  // }
+  
 ];
 
 LearnerSubmissions.splice(2, 1);
@@ -97,18 +118,17 @@ function getLearnerData(course, ag, submissions) {
   // Process submissions using forEach
   submissions.forEach((submission) => {
     const { learner_id, assignment_id, submission: { submitted_at, score } } = submission;
-    //Testing to see that all submissions are appearing before removing due to assignment not being due.
-    // console.log(submission)
+    //Testing to see that all submissions are appearing before removing due to assignment not being due. **Just ended up splicing it out***
   
 
     // Is the work late?
     const assignment = ag.assignments.find((a) => a.id === assignment_id);
-    const dueOn = new Date(assignment.due_at); //Adjusted for strings
-    const submittedOn = new Date(submitted_at); //Adjusted for strings
+    const dueOn = new Date(assignment.due_at); //Adjusts for strings
+    const submittedOn = new Date(submitted_at); //Adjusts for strings
     const lateWork = submittedOn > dueOn;
 
     
-    // Take off 10% if late
+    // Take off 10% if late (? operator for true : false)
     const adjustedScore = lateWork ? Math.max(score - 0.1 * assignment.points_possible, 0) : score;
 
 
@@ -127,7 +147,7 @@ function getLearnerData(course, ag, submissions) {
     learnerData.assignmentScores[assignment_id] = adjustedScore;
   });
 
-  // Calculate weighted averages
+  //Calculate averages
   for (const learner_id in learnerDataObject) {
     if (Object.prototype.hasOwnProperty.call(learnerDataObject, learner_id)) {
       const learnerData = learnerDataObject[learner_id];
