@@ -159,7 +159,7 @@ function getLearnerData(course, ag, submissions) {
    * This loop insures that the properties in the learnerDataObject exist and won't cause errors for the object
    */
   for (const learner_id in learnerDataObject) {
-    if (Object.prototype.hasOwnProperty.call(learnerDataObject, learner_id)) {
+    if (Object.hasOwn(learnerDataObject, learner_id)) {
       const learnerData = learnerDataObject[learner_id];
       const avg = learnerData.totalScore / learnerData.totalWeight;
       const learnerResult = {
