@@ -138,7 +138,7 @@ function getLearnerData(course, ag, submissions) {
     const adjustedScore = lateWork ? Math.max(score - 0.1 * assignment.points_possible, 0) : score;
 
 
-    // Update learner data
+    // Input learner data
     if (!learnerDataObject[learner_id]) {
       learnerDataObject[learner_id] = {
         id: learner_id,
