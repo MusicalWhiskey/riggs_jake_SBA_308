@@ -98,7 +98,7 @@ const LearnerSubmissions = [
 ];
 
 LearnerSubmissions.splice(2, 1);
-//Removed assignment with future due date
+//Removed assignment with future due date (I'm sure there's a better way...ugh)
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
