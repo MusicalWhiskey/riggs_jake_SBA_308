@@ -155,8 +155,7 @@ function getLearnerData(course, ag, submissions) {
 
   //Calculate averages
   /**
-   * 
-   * This loop insures that the properties in the learnerDataObject exist and won't cause errors for the object
+   * This loop insures that the properties in the learnerDataObject exist
    */
   for (const learner_id in learnerDataObject) {
     if (Object.hasOwn(learnerDataObject, learner_id)) {
